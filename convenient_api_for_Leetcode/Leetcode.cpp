@@ -8,18 +8,23 @@ using namespace std;
 
 /*print a binary tree according to the format of Leetcode*/
 void printtree(TreeNode *head){
+    vector<string> result;
     queue<TreeNode*> q;
     q.push(head);
     while(!q.empty()){
         TreeNode *front = q.front();
         q.pop();
-        if(front == NULL) cout<<"null"<<" ";
-        else cout<<front->val<<" ";
+        if(front == NULL) result.push_back("null");
+        else result.push_back(to_string(front->val)); 
         if(front != NULL){
             q.push(front->left);
             q.push(front->right);
         }
     }
+    while(!result.empty() && result.back().compare("null")==0)
+        result.pop_back();
+    for(int i = 0;i != result.size();++i)
+        cout<<result[i]<<" ";
     cout<<endl;
 }
 
